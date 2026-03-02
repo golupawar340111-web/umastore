@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Control Room | Uma Store</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="config.js"></script>
+
+    <link rel="stylesheet" href="seller_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="logo">
+            <h2>Uma Store</h2>
+            <p>Seller Panel</p>
+        </div>
+        <ul>
+            <li class="active"><i class="fas fa-th-large"></i> Dashboard</li>
+            <li onclick="window.location.href='saller_dashboard/orders.html'"><i class="fas fa-shopping-basket"></i> Orders</li>
+            <li onclick="window.location.href='saller_dashboard/products.html'"><i class="fas fa-box"></i> Products</li>
+            <li onclick="window.location.href='saller_dashboard/sales_report.html'"><i class="fas fa-chart-line"></i> Sales Report</li>
+            <li><i class="fas fa-wallet"></i> Payouts</li>
+            <li><i class="fas fa-cog"></i> Settings</li>
+        </ul>
+        <div class="logout">
+            <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+<main class="main-content">
+    <section class="shop-hero">
+        <div class="glass-morph-card">
+            <div class="hero-main">
+                <div class="shop-brand">
+                    <div class="avatar-ring">
+                        <img id="shopLogo" src="https://cdn-icons-png.flaticon.com/512/606/606363.png" alt="Shop">
+                    </div>
+                    <div class="brand-text">
+                        <h1 id="shopNameDisplay">Uma Premium</h1>
+                        <p><i class="fas fa-leaf"></i> Pure & Authentic Organic Hub</p>
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-bubble">
+                        <span class="num" id="totalOrdersCount">0</span>
+                        <span class="txt">Total Sales</span>
+                    </div>
+                    <div class="stat-bubble highlight">
+                        <span class="num">4.9</span>
+                        <span class="txt">Trust Score</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-footer">
+                <div class="location-tag"><i class="fas fa-map-marker-alt"></i> Khirkiya, MP</div>
+                <div class="action-row">
+                    <button class="btn-glow">Edit Brand</button>
+                    <button class="btn-icon"><i class="fas fa-share-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="inventory-section">
+        <div class="section-title">
+            <h2>Your Digital Showcase</h2>
+            <div class="view-filters">
+                <span>All Items</span>
+                <span>Best Sellers</span>
+            </div>
+        </div>
+        
+        <div class="dynamic-masonry" id="productGridDisplay">
+            </div>
+    </section>
+</main>
+
+    <script src="seller_dashboard.js"></script>
+</body>
+</html>

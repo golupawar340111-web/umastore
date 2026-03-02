@@ -1,0 +1,36 @@
+:root {
+    --primary: #000;
+    --accent: #2563eb;
+    --bg: #f8fafc;
+    --input-bg: #ffffff;
+    --border: #e2e8f0;
+}
+
+body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+
+.address-container { max-width: 450px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+
+.address-header { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
+.address-header h1 { font-size: 1.4rem; margin: 0; font-weight: 700; }
+.back-btn { color: #000; font-size: 1.2rem; }
+
+.address-form { display: flex; flex-direction: column; gap: 20px; }
+
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+.input-group label { font-size: 0.9rem; font-weight: 600; color: #475569; display: flex; align-items: center; gap: 8px; }
+.input-group label i { color: var(--accent); font-size: 0.8rem; }
+
+.input-group input, .input-group select, .input-group textarea {
+    padding: 12px 15px; border: 1px solid var(--border); border-radius: 10px;
+    font-size: 1rem; background: var(--input-bg); transition: all 0.3s;
+}
+
+.input-group input:focus, .input-group textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+.info-alert { background: #eff6ff; padding: 12px; border-radius: 10px; display: flex; gap: 10px; align-items: center; font-size: 0.85rem; color: #1e40af; }
+
+.save-btn {
+    background: var(--primary); color: #fff; border: none; padding: 16px;
+    border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer;
+    margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+}

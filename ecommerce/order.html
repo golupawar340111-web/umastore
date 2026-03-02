@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | UMA Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #2563eb; --success: #22c55e; --warning: #f59e0b; --gray: #64748b; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
+        .header { display: flex; align-items: center; margin-bottom: 25px; }
+        .header h2 { margin-left: 15px; color: #1e293b; }
+        
+        /* Order Card */
+        .order-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .order-header { display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 12px; }
+        .order-id { font-weight: bold; color: var(--primary); font-size: 14px; }
+        .order-date { font-size: 12px; color: var(--gray); }
+
+        .product-info { display: flex; gap: 15px; align-items: center; }
+        .product-img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; background: #f1f5f9; }
+        .details h3 { margin: 0; font-size: 16px; color: #1e293b; }
+        .details p { margin: 4px 0; font-size: 14px; color: var(--gray); }
+        .price { font-weight: 700; color: #000; }
+
+        /* Status Badge */
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-packed { background: #e0f2fe; color: #0369a1; }
+        .status-out { background: #f0fdf4; color: #16a34a; }
+        .status-delivered { background: #dcfce7; color: #15803d; }
+
+        /* Timeline View (Hidden by default) */
+        .tracking-box { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1; display: none; }
+        .timeline { list-style: none; padding: 0; position: relative; }
+        .timeline li { padding-left: 30px; position: relative; margin-bottom: 15px; font-size: 13px; color: var(--gray); }
+        .timeline li::before { content: ''; position: absolute; left: 0; top: 2px; width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%; }
+        .timeline li.active { color: var(--primary); font-weight: bold; }
+        .timeline li.active::before { background: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2); }
+
+        /* Action Buttons */
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .btn { padding: 10px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-track { background: var(--primary); color: white; }
+        .btn-call { background: #fff; border: 1px solid #e2e8f0; color: #1e293b; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" style="color: black;"><i class="fas fa-arrow-left"></i></a>
+        <h2>My Orders</h2>
+    </div>
+
+    <div id="ordersList">
+        <p style="text-align: center; color: gray; margin-top: 50px;">Orders load ho rahe hain...</p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // 1. Firebase Config (Apni Details Daalein)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBEzu1v0s0OxYOIgzdCWMLmt5dd-wX5lO8",
+            authDomain: "umastore-4f131.firebaseapp.com",
+            projectId: "umastore-4f131",
+            storageBucket: "umastore-4f131.firebasestorage.app",
+            messagingSenderId: "772729193852",
+            appId: "1:772729193852:web:983919536e8196abc110f9"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 2. Orders Load Karne ka Function
+        function loadMyOrders() {
+            const ordersList = document.getElementById('ordersList');
+            
+            // Real-time listener: Jaise hi Seller status badlega, page apne aap update hoga
+            db.collection("orders")
+              .orderBy("timestamp", "desc")
+              .onSnapshot((snapshot) => {
+                ordersList.innerHTML = "";
+                
+                if (snapshot.empty) {
+                    ordersList.innerHTML = "<p style='text-align:center;'>Abhi tak koi order nahi hai.</p>";
+                    return;
+                }
+
+                snapshot.forEach(doc => {
+                    const order = doc.data();
+                    const statusClass = order.status.toLowerCase().replace(/\s/g, '');
+                    const date = order.timestamp ? order.timestamp.toDate().toLocaleDateString() : 'Processing';
+
+                    ordersList.innerHTML += `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-id">#ID-${doc.id.slice(0, 8)}</span>
+                                <span class="order-date">${date}</span>
+                            </div>
+                            
+                            <div class="product-info">
+                                <img src="${order.items[0].img || 'https://placehold.co/100'}" class="product-img">
+                                <div class="details">
+                                    <h3>${order.items[0].name}</h3>
+                                    <p>Kul Items: ${order.items.length}</p>
+                                    <p class="price">₹${order.totalAmount}</p>
+                                    <span class="status-badge status-${statusClass}">${order.status}</span>
+                                </div>
+                            </div>
+
+                            <p style="font-size:12px; color:gray; margin-top:10px;">
+                                <i class="fas fa-map-marker-alt"></i> Delivery: ${order.address}
+                            </p>
+
+                            <div class="tracking-box" id="track-${doc.id}">
+                                <ul class="timeline">
+                                    <li class="${isActive('Pending', order.status)}">Order Mil Gaya</li>
+                                    <li class="${isActive('Packed', order.status)}">Saaman Pack Ho Gaya</li>
+                                    <li class="${isActive('Out for Delivery', order.status)}">Raste Mein Hai</li>
+                                    <li class="${isActive('Delivered', order.status)}">Pahunch Gaya ✅</li>
+                                </ul>
+                            </div>
+
+                            <div class="actions">
+                                <button class="btn btn-track" onclick="toggleTracking('${doc.id}')">
+                                    <i class="fas fa-route"></i> Track Order
+                                </button>
+                                <a href="tel:+919201380750" class="btn btn-call" style="text-decoration:none;">
+                                    <i class="fas fa-phone-alt"></i> Support
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        // Timeline check logic
+        function isActive(step, currentStatus) {
+            const levels = ['Pending', 'Packed', 'Out for Delivery', 'Delivered'];
+            return levels.indexOf(currentStatus) >= levels.indexOf(step) ? 'active' : '';
+        }
+
+        function toggleTracking(id) {
+            const box = document.getElementById(`track-${id}`);
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onload = loadMyOrders;
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="order.js"></script>
+</body>
+</body>
+</html>

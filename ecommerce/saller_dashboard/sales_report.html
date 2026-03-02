@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Analytics | UMA Store Seller</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="sales_report.css">
+</head>
+<body>
+
+<header class="report-header">
+    <div class="header-content">
+        <h1><i class="fas fa-chart-line"></i> Business Insights</h1>
+        <div class="filter-group">
+            <select id="timePeriod" onchange="updateAnalytics()">
+                <option value="7">Last 7 Days</option>
+                <option value="30">This Month</option>
+                <option value="365">This Year</option>
+            </select>
+        </div>
+    </div>
+</header>
+
+<main class="report-container">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="label">Today's Sale</span>
+            <h2 id="todaySale">₹0</h2>
+            <span class="trend up"><i class="fas fa-arrow-up"></i> 12%</span>
+        </div>
+        <div class="stat-card">
+            <span class="label">Monthly Revenue</span>
+            <h2 id="monthSale">₹0</h2>
+        </div>
+        <div class="stat-card">
+            <span class="label">Net Earning (Payout)</span>
+            <h2 id="netEarning" style="color: #10b981;">₹0</h2>
+        </div>
+        <div class="stat-card">
+            <span class="label">Pending COD</span>
+            <h2 id="pendingCod" style="color: #f59e0b;">₹0</h2>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+        <div class="chart-box">
+            <h3>Revenue Growth</h3>
+            <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h3>Order Status Breakdown</h3>
+            <canvas id="orderPieChart"></canvas>
+        </div>
+    </div>
+
+    <div class="details-grid">
+        <div class="table-box">
+            <h3><i class="fas fa-map-marker-alt"></i> Village Wise Sale</h3>
+            <table id="villageTable">
+                <thead><tr><th>Village</th><th>Orders</th><th>Revenue</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="table-box">
+            <h3><i class="fas fa-trophy"></i> Top Selling Products</h3>
+            <div id="topProducts" class="product-rank-list">
+                </div>
+        </div>
+    </div>
+</main>
+
+<script src="sales_report.js"></script>
+</body>
+</html>

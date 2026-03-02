@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dukan Feed | UMA Store</title>
+    <link rel="stylesheet" href="shop_feed.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <section class="shop-header">
+        <div class="shop-info">
+            <h1 id="shopNameDisplay">Ram Kirana Store</h1>
+            <p><i class="fas fa-map-marker-alt"></i> <span id="shopLocation">Chokdi</span></p>
+            <div class="delivery-badge"><i class="fas fa-bolt"></i> 2 Hour Delivery</div>
+        </div>
+        <div class="shop-photo">
+            <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80" alt="Shop">
+        </div>
+    </section>
+
+    <section class="today-update">
+        <div class="section-title">📢 Aaj Kya Naya Aaya?</div>
+        <div class="hero-banner">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80" alt="Fresh Stock">
+            <div class="hero-overlay">
+                <h3>Fresh Stock Arrived!</h3>
+                <p>Aaj hi aaya hai ekdum taaza maal.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="highlights">
+        <div class="section-title">🎯 Aaj ki Highlights</div>
+        <div class="scroll-row">
+            <div class="p-card">
+                <img src="https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?auto=format&fit=crop&w=300&q=80" alt="Prod">
+                <h4>Saffola Oil</h4>
+                <p>₹180 <span>₹200</span></p>
+            </div>
+            <div class="p-card">
+                <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=300&q=80" alt="Prod">
+                <h4>Fresh Apple</h4>
+                <p>₹120 <span>₹150</span></p>
+            </div>
+            </div>
+    </section>
+
+    <section class="daily-feed">
+        <div class="section-title">📸 Shop ki Diary</div>
+        <div class="post-card">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/40" alt="Logo">
+                <span>Ram Kirana Store • <small>2h ago</small></span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=800&q=80" class="post-img">
+            <div class="post-desc">
+                <b>New Arrivals:</b> Maggi ke naye family packs ab available hain! Jaldi karein stock khatam hone se pehle.
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <div class="trust-card">
+            <i class="fas fa-truck-loading"></i>
+            <h4>50+ Orders Delivered Today</h4>
+        </div>
+        <div class="trust-card">
+            <i class="fas fa-star"></i>
+            <h4>4.8/5 Customer Rating</h4>
+        </div>
+    </section>
+
+    <section class="flash-offers">
+        <div class="offer-box">
+            <span>FLAT 20% OFF</span>
+            <p>On all Dairy Products - Valid till 9 PM</p>
+        </div>
+    </section>
+
+    <section class="all-products">
+        <div class="section-title">📦 Saara Maal</div>
+        <div class="grid-view" id="productGrid">
+            </div>
+    </section>
+
+    <div class="order-cta">
+        <button onclick="orderOnWhatsApp()"><i class="fab fa-whatsapp"></i> Order On WhatsApp</button>
+    </div>
+<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <script src="shop_feed.js"></script>
+</body>
+</html>

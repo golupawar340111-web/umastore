@@ -1,0 +1,39 @@
+:root { --primary: #4361ee; --dark: #1a1a2e; --text: #444; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body { background: #f4f7fe; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+
+.auth-container { width: 100%; max-width: 400px; }
+
+.auth-logo { text-align: center; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 30px; cursor: pointer; }
+.auth-logo span { color: var(--primary); }
+
+.auth-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+.hidden { display: none; }
+
+h2 { color: var(--dark); font-size: 24px; margin-bottom: 5px; }
+.subtitle { color: #888; font-size: 14px; margin-bottom: 25px; }
+
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none; transition: 0.3s; }
+.input-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1); }
+
+.mobile-input { display: flex; align-items: center; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; }
+.mobile-input span { padding: 12px; background: #eee; font-weight: bold; font-size: 14px; }
+.mobile-input input { border: none !important; border-radius: 0; }
+
+.terms { display: flex; align-items: center; gap: 10px; font-size: 13px; margin-bottom: 25px; }
+.auth-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.auth-btn:hover { background: #304ed0; transform: translateY(-2px); }
+
+.auth-footer { text-align: center; margin-top: 20px; font-size: 14px; color: #666; }
+.auth-footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+/* OTP Boxes */
+.otp-inputs { display: flex; justify-content: space-between; margin-bottom: 25px; }
+.otp-box { width: 60px; height: 60px; text-align: center; font-size: 24px; font-weight: bold; border: 2px solid #ddd; border-radius: 12px; outline: none; }
+.otp-box:focus { border-color: var(--primary); }
+
+.wa-help { display: block; text-align: center; margin-top: 30px; color: #25D366; text-decoration: none; font-weight: 600; font-size: 14px; }
+.resend { text-align: center; margin-top: 15px; font-size: 13px; }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Center | UMA Store</title>
+    <link rel="stylesheet" href="sellerstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<div class="reg-container">
+    <div class="tab-box">
+        <button id="tab-reg" class="active" onclick="switchTab('reg')">Naya Registration</button>
+        <button id="tab-login" onclick="switchTab('login')">Purana Account (Login)</button>
+    </div>
+
+    <form id="registerForm">
+        <div class="header-box">
+            <i class="fas fa-store"></i>
+            <h2>Become a Seller</h2>
+            <p>Apni shop ko 2 minute mein online layein</p>
+        </div>
+
+        <div class="form-group">
+            <label>Shop Name (Dukaan ka naam)</label>
+            <input type="text" id="regShopName" placeholder="e.g. Rahul Kirana Store" required>
+        </div>
+
+        <div class="form-group">
+            <label>Owner Name (Maalik ka naam)</label>
+            <input type="text" id="regOwnerName" placeholder="Owner ka naam" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mobile Number (For OTP)</label>
+            <div class="phone-input">
+                <input type="tel" id="regMobile" maxlength="10" placeholder="10 digit number" required>
+                <button type="button" id="regSendOtpBtn" onclick="sendOTP('reg')">Send OTP</button>
+            </div>
+        </div>
+
+        <div id="reg-otp-section" style="display:none;">
+            <div class="form-group">
+                <label>Enter 6-Digit OTP</label>
+                <input type="number" id="regOtpInput" placeholder="000000">
+                <p class="timer">Resend in <span id="reg-sec">30</span>s</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Village / City</label>
+            <input type="text" id="regVillage" placeholder="Gaon ya shehar" required>
+        </div>
+
+        <div class="form-group">
+    <label>Business Category</label>
+    <div class="select-wrapper">
+        <select id="regCategory" required>
+            <option value="" disabled selected>Select your business type</option>
+            <option value="Grocery">Grocery & Kirana</option>
+            <option value="Daily Use">Daily Essentials</option>
+            <option value="Farming">Agriculture & Farming</option>
+            <option value="Health">Pharmacy & Health</option>
+            <option value="Home">Home & Kitchen</option>
+            <option value="Fashion">Clothing & Fashion</option>
+            <option value="Beauty">Beauty & Personal Care</option>
+            <option value="Electronics">Electronics & Mobiles</option>
+            <option value="Stationery">Books & Stationery</option>
+            <option value="Kids">Baby & Kids Care</option>
+            <option value="Tools">Hardware & Tools</option>
+            <option value="Animal Care">Pet & Animal Care</option>
+        </select>
+        <i class="fas fa-chevron-down select-icon"></i>
+    </div>
+</div>
+
+        <div id="recaptcha-container"></div>
+        <button type="submit" class="submit-btn" id="regSubmitBtn">Verify & Register</button>
+    </form>
+
+    <form id="loginForm" style="display:none;">
+        <div class="header-box">
+            <i class="fas fa-user-lock"></i>
+            <h2>Seller Login</h2>
+            <p>Apne dashboard mein wapas jayein</p>
+        </div>
+        <div class="form-group">
+            <label>Registered Mobile Number</label>
+            <div class="phone-input">
+                <input type="tel" id="loginMobile" maxlength="10" placeholder="Number daalein" required>
+                <button type="button" id="loginSendOtpBtn" onclick="sendOTP('login')">Send OTP</button>
+            </div>
+        </div>
+        <div id="login-otp-section" style="display:none;">
+            <div class="form-group">
+                <label>Enter OTP</label>
+                <input type="number" id="loginOtpInput" placeholder="******">
+            </div>
+            <button type="submit" class="submit-btn">Login Now</button>
+        </div>
+    </form>
+</div>
+
+<script src="sellerregistration.js"></script>
+</body>
+</html>

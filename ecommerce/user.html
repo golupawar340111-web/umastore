@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mera Profile | UMA STORE</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+
+    <link rel="stylesheet" href="user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    
+</head>
+<body>
+
+<div class="profile-header">
+    <div class="user-pic"><i class="fa fa-user"></i></div>
+    <h2 id="userNameDisplay">Hello, Customer!</h2>
+    <p id="userPhoneDisplay">+91 0000000000</p>
+</div>
+
+<div class="container">
+    <div class="menu-card">
+        <a href="order.html" class="menu-item">
+            <i class="fa fa-box"></i>
+            <div class="text">My Orders</div>
+            <span class="status-badge" id="orderCount">0</span>
+            <i class="fa fa-chevron-right arrow"></i>
+        </a>
+        <a href="tracking.html" class="menu-item">
+            <i class="fa fa-truck"></i>
+            <div class="text">Order Tracking</div>
+            <i class="fa fa-chevron-right arrow"></i>
+        </a>
+    </div>
+
+    <div class="menu-card">
+        
+    <a href="edit_profile.html" class="menu-item">
+        <i class="fa fa-user-edit"></i>
+        <div class="text">Edit Info</div>
+        <i class="fa fa-chevron-right arrow"></i>
+    </a>
+
+        <a href="addresses.html" class="menu-item">
+            <i class="fa fa-map-marker-alt"></i>
+            <div class="text">Saved Addresses</div>
+            <i class="fa fa-chevron-right arrow"></i>
+        </a>
+        <a href="wishlist.html" class="menu-item">
+            <i class="fa fa-heart"></i>
+            <div class="text">Wishlist</div>
+            <i class="fa fa-chevron-right arrow"></i>
+        </a>
+    </div>
+
+    <div class="menu-card">
+        <a href="https://wa.me/919201380750" class="menu-item">
+            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+            <div class="text">Help</div>
+            <i class="fa fa-chevron-right arrow"></i>
+        </a>
+        <a href="offers.html" class="menu-item">
+            <i class="fa fa-tag" style="color: #f1c40f;"></i>
+            <div class="text">Offer aur Coupons</div>
+            <i class="fa fa-chevron-right arrow"></i>
+        </a>
+    </div>
+
+    <div class="menu-card">
+        <div class="menu-item logout-btn" onclick="userLogout()">
+            <i class="fa fa-sign-out-alt"></i>
+            <div class="text">Log Out</div>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-nav">
+    <a href="index.html" class="nav-link"><i class="fa fa-home"></i>Home</a>
+    <a href="cart.html" class="nav-link"><i class="fa fa-shopping-cart"></i>Cart</a>
+    <a href="user.html" class="nav-link active"><i class="fa fa-user"></i>Profile</a>
+</div>
+
+<script>
+    // Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyBEzu1v0s0OxYOIgzdCWMLmt5dd-wX5lO8",
+        authDomain: "umastore-4f131.firebaseapp.com",
+        projectId: "umastore-4f131",
+        storageBucket: "umastore-4f131.firebasestorage.app",
+        messagingSenderId: "772729193852",
+        appId: "1:772729193852:web:983919536e8196abc110f9"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Check Login Status
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            // User login hai
+            document.getElementById('userPhoneDisplay').innerText = user.phoneNumber || "Verified User";
+            loadUserData(user.uid);
+        } else {
+            // Login nahi hai toh login page par bhejo
+            window.location.href = 'login.html';
+        }
+    });
+
+    async function loadUserData(uid) {
+        // Firebase se orders ginn-na
+        const snapshot = await db.collection("orders").where("userId", "==", uid).get();
+        document.getElementById('orderCount').innerText = snapshot.size;
+    }
+
+    function userLogout() {
+        if(confirm("Bhai, kya aap sach mein logout karna chahte hain?")) {
+            auth.signOut().then(() => {
+                window.location.href = 'index.html';
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

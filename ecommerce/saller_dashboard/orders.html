@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management | Seller Dashboard</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="orders.css">
+</head>
+<body>
+
+<div class="dashboard-header">
+    <div class="header-content">
+        <h1><i class="fas fa-boxes"></i> Store Orders</h1>
+        <div id="orderStats" class="stats-badge">Loading...</div>
+    </div>
+</div>
+
+<div class="filter-tabs">
+    <button class="tab-btn active" onclick="filterOrders('all')">All</button>
+    <button class="tab-btn" onclick="filterOrders('Pending')">Pending</button>
+    <button class="tab-btn" onclick="filterOrders('Packed')">Packed</button>
+    <button class="tab-btn" onclick="filterOrders('Delivered')">Delivered</button>
+</div>
+
+<main class="orders-container" id="ordersList">
+    <div class="loader">Fetching latest orders...</div>
+</main>
+
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script src="orders.js"></script>
+</body>
+</html>

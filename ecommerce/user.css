@@ -1,0 +1,168 @@
+/* user.css - UMA STORE Profile Styling */
+
+:root {
+    --primary-color: #4361ee;
+    --danger-color: #ff4757;
+    --text-dark: #2d3436;
+    --bg-light: #f7f9fc;
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+body {
+    background-color: var(--bg-light);
+    margin: 0;
+    padding-bottom: 80px; /* Bottom nav ke liye jagah */
+}
+
+/* Header Section */
+.profile-header {
+    background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+    color: white;
+    padding: 50px 20px 40px;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+    position: relative;
+}
+
+.user-pic {
+    width: 90px;
+    height: 90px;
+    background: white;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.profile-header h2 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+}
+
+.profile-header p {
+    margin: 5px 0 0;
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+/* Container & Menu Cards */
+.container {
+    max-width: 600px;
+    margin: -25px auto 0;
+    padding: 0 15px;
+    position: relative;
+    z-index: 10;
+}
+
+.menu-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f8f9fa;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: background 0.2s ease;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:active {
+    background-color: #f1f3ff;
+}
+
+.menu-item i {
+    width: 38px;
+    font-size: 20px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.menu-item .text {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.menu-item .arrow {
+    color: #cbd5e0;
+    font-size: 14px;
+}
+
+/* Badges & Special Items */
+.status-badge {
+    background: var(--danger-color);
+    color: white;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.logout-btn {
+    margin-top: 10px;
+}
+
+.logout-btn .text, .logout-btn i {
+    color: var(--danger-color) !important;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #edf2f7;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+    z-index: 1000;
+}
+
+.nav-link {
+    text-align: center;
+    text-decoration: none;
+    color: #a0aec0;
+    font-size: 11px;
+    flex: 1;
+    transition: 0.3s;
+}
+
+.nav-link i {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+/* Animation for smooth feel */
+.menu-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,122 @@
+/* product.css - Copy this full code */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.p-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.p-image-side {
+    flex: 1;
+    min-width: 300px;
+}
+
+.main-img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.p-info-side {
+    flex: 1.2;
+    min-width: 300px;
+}
+
+.stock-tag {
+    background: #e6fffa;
+    color: #38a169;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+h2 {
+    font-size: 28px;
+    margin: 15px 0;
+    color: #2d3436;
+}
+
+.price-tag {
+    font-size: 26px;
+    font-weight: bold;
+    color: #4361ee;
+    margin-bottom: 20px;
+}
+
+.mrp {
+    font-size: 18px;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+
+.benefits-box {
+    background: #f1f3f5;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.benefits-box ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.benefits-box li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.benefits-box i {
+    color: #38a169;
+    margin-right: 8px;
+}
+
+.btn-grp {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-cart {
+    background: #2f3542;
+    color: white;
+}
+
+.buy-now {
+    background: #ff4757;
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,66 @@
+:root {
+    --primary: #2563eb;
+    --success: #16a34a;
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --border: #e2e8f0;
+}
+
+body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--text); }
+
+.tracking-container { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+
+.tracking-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+.tracking-header h1 { font-size: 1.5rem; margin: 0; }
+.back-btn { color: #000; text-decoration: none; font-size: 1.2rem; }
+
+/* Order Summary */
+.order-summary-card { background: #f1f5f9; border-radius: 12px; padding: 15px; margin-bottom: 30px; }
+.order-id-row { margin-bottom: 15px; font-size: 0.9rem; }
+.order-id-row .value { font-weight: 700; color: var(--primary); }
+.order-item-row { display: flex; gap: 15px; align-items: center; }
+.order-item-row img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+.item-meta h3 { margin: 0; font-size: 1rem; }
+.item-meta p { margin: 2px 0; font-size: 0.85rem; color: #64748b; }
+
+/* Timeline UI */
+
+.status-timeline { position: relative; padding-left: 20px; margin-bottom: 40px; }
+.timeline-step { position: relative; padding-bottom: 35px; padding-left: 35px; }
+.timeline-step:last-child { padding-bottom: 0; }
+
+/* The Connecting Line */
+.timeline-step::before {
+    content: ''; position: absolute; left: 13px; top: 26px;
+    width: 2px; height: 100%; background: var(--border); z-index: 1;
+}
+.timeline-step:last-child::before { display: none; }
+
+.icon-box {
+    position: absolute; left: 0; top: 0; width: 28px; height: 28px;
+    background: #fff; border: 2px solid var(--border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; z-index: 2; color: var(--border);
+}
+
+.step-content h4 { margin: 0; font-size: 1rem; color: #94a3b8; }
+.step-content p { margin: 4px 0 0; font-size: 0.85rem; color: #94a3b8; }
+
+/* Active State Logic */
+.timeline-step.active .icon-box { background: var(--success); border-color: var(--success); color: #fff; }
+.timeline-step.active .step-content h4 { color: var(--text); }
+.timeline-step.active .step-content p { color: #64748b; }
+.timeline-step.active::before { background: var(--success); }
+
+/* Footer Info */
+.info-row { display: flex; gap: 15px; margin-bottom: 20px; }
+.info-row i { color: var(--primary); margin-top: 5px; }
+.info-label { margin: 0; font-size: 0.8rem; color: #64748b; }
+.info-value { margin: 2px 0 0; font-weight: 600; font-size: 0.95rem; }
+
+.action-footer { margin-top: 30px; }
+.btn-support {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: #000; color: #fff; text-decoration: none;
+    padding: 15px; border-radius: 12px; font-weight: 600;
+}

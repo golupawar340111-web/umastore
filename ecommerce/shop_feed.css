@@ -1,0 +1,68 @@
+:root {
+    --primary: #4361ee;
+    --success: #2ec4b6;
+    --dark: #2b2d42;
+    --light: #f8fafc;
+}
+
+body {
+    margin: 0; font-family: 'Poppins', sans-serif;
+    background: #f0f2f5; color: var(--dark);
+    padding-bottom: 80px;
+}
+
+.section-title {
+    padding: 15px; font-weight: 700; font-size: 18px;
+}
+
+/* Shop Header */
+.shop-header {
+    background: white; padding: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+}
+.shop-info h1 { margin: 0; font-size: 22px; color: var(--primary); }
+.delivery-badge { 
+    background: #eef2ff; color: var(--primary); 
+    padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-top: 8px;
+}
+.shop-photo img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); }
+
+/* Today's Update */
+.hero-banner { 
+    position: relative; margin: 0 15px; border-radius: 15px; overflow: hidden; height: 200px; 
+}
+.hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { 
+    position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    width: 100%; padding: 15px; color: white;
+}
+
+/* Scrollable Highlights */
+.scroll-row { 
+    display: flex; overflow-x: auto; padding: 0 15px; gap: 15px; scrollbar-width: none;
+}
+.p-card { 
+    background: white; min-width: 140px; padding: 10px; border-radius: 12px; text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.p-card img { width: 100%; height: 100px; object-fit: contain; }
+.p-card h4 { font-size: 14px; margin: 8px 0; }
+.p-card p { color: var(--success); font-weight: 700; margin: 0; }
+.p-card p span { text-decoration: line-through; color: #999; font-size: 11px; }
+
+/* Daily Feed */
+.post-card { background: white; margin: 15px; border-radius: 15px; overflow: hidden; }
+.post-header { padding: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.post-img { width: 100%; max-height: 350px; object-fit: cover; }
+.post-desc { padding: 12px; font-size: 14px; line-height: 1.5; }
+
+/* Order CTA */
+.order-cta { 
+    position: fixed; bottom: 0; width: 100%; padding: 15px; background: white; 
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1); display: flex; justify-content: center;
+}
+.order-cta button { 
+    background: #25D366; color: white; border: none; width: 90%; 
+    padding: 15px; border-radius: 30px; font-weight: 700; font-size: 16px; 
+}

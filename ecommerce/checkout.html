@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | UMA STORE</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <link rel="stylesheet" href="checkout.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body { background: #f4f7fe; font-family: sans-serif; margin: 0; }
+        .checkout-container { max-width: 1000px; margin: 30px auto; padding: 0 15px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #edf0f5; }
+        h3 { margin-top: 0; color: #2d3436; border-bottom: 2px solid #f1f1f1; padding-bottom: 10px; font-size: 1.1rem; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px; color: #555; }
+        .input-group input, .input-group textarea { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; font-size: 15px; box-sizing: border-box; }
+        
+        /* Location Button Styling */
+        .btn-location { 
+            width: 100%; background: #4361ee; color: white; border: none; padding: 12px; 
+            border-radius: 10px; font-weight: bold; cursor: pointer; display: flex; 
+            align-items: center; justify-content: center; gap: 10px; transition: 0.3s;
+        }
+        .btn-location:hover { background: #3046bc; }
+        .location-box { background: #f0f7ff; padding: 15px; border-radius: 12px; border: 1px dashed #4361ee; margin-bottom: 15px; }
+        #deliveryInfo { margin-top: 10px; font-size: 14px; color: #2d3436; line-height: 1.6; }
+
+        .order-item { display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #eee; }
+        .total-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; margin-top: 15px; color: #4361ee; border-top: 2px solid #f8f9fa; padding-top: 15px; }
+        .place-order-btn { width: 100%; padding: 18px; background: #000; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .place-order-btn:hover { background: #333; transform: translateY(-2px); }
+        .place-order-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .step-tag { background: #4361ee; color: white; padding: 3px 10px; border-radius: 50%; font-size: 12px; margin-right: 10px; }
+        
+        @media (max-width: 768px) { .checkout-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header style="text-align: center; padding: 20px; background: white; border-bottom: 1px solid #eee;">
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; font-weight: 900; font-size: 1.5rem;">UMA<span style="color:#4361ee">STORE</span></div>
+</header>
+
+<div class="checkout-container">
+    <div class="left-side">
+        <div class="card">
+            <h3><span class="step-tag">1</span> Customer & Delivery Details</h3>
+            
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="custName" placeholder="अपना नाम लिखें" required>
+            </div>
+
+            <div class="input-group">
+                <label>Mobile Number</label>
+                <input type="tel" id="custPhone" placeholder="10-digit mobile number" required>
+            </div>
+
+            <div class="location-box">
+                <label style="display:block; margin-bottom:10px; font-weight:bold; font-size:14px;">Delivery Area Detection</label>
+                <button type="button" class="btn-location" onclick="getUserLocation()">
+                    <i class="fas fa-location-arrow"></i> Detect Location & Calculate Charge
+                </button>
+                <div id="deliveryInfo">
+                    <small style="color: #666;">Click to check if we deliver to your area (within 30KM from Khirkiya).</small>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Full Address (House No/Landmark)</label>
+                <textarea id="custAddress" rows="2" placeholder="गली नंबर, मकान नंबर या पास की कोई प्रसिद्ध जगह" required></textarea>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-tag">2</span> Payment Method</h3>
+            <div style="padding: 10px 0;">
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="radio" name="payMethod" value="UPI" checked> 
+                    <span><i class="fa fa-mobile-alt"></i> PhonePe / Google Pay / UPI</span>
+                </label>
+                <p style="font-size: 12px; color: #666; margin-left: 25px; margin-top: 5px;">(पेमेंट करने के बाद ही आर्डर कन्फर्म होगा)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="card">
+            <h3>Order Summary</h3>
+            <div id="checkoutItemsList">
+                <p>Loading items...</p>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div class="order-item" style="border:none; color: #666;">
+                    <span>Subtotal:</span>
+                    <span id="checkoutTotal">₹0</span>
+                </div>
+                <div class="order-item" style="border:none; color: #666;">
+                    <span>Delivery Fee:</span>
+                    <span id="deliveryChargeDisplay">₹0</span>
+                </div>
+                <div class="total-row">
+                    <span>Grand Total:</span>
+                    <span id="finalTotalDisplay">₹0</span>
+                </div>
+            </div>
+
+            <button class="place-order-btn" id="mainOrderBtn" onclick="placeOrder()" disabled>
+                <i class="fa fa-shopping-bag"></i> PAY & PLACE ORDER
+            </button>
+            <p id="locWarning" style="color:red; font-size:11px; text-align:center; margin-top:10px;">Please check delivery eligibility first!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBEzu1v0s0OxYOIgzdCWMLmt5dd-wX5lO8",
+        authDomain: "umastore-4f131.firebaseapp.com",
+        projectId: "umastore-4f131",
+        storageBucket: "umastore-4f131.firebasestorage.app",
+        messagingSenderId: "772729193852",
+        appId: "1:772729193852:web:983919536e8196abc110f9"
+    };
+    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+    const db = firebase.firestore();
+</script>
+
+<script src="checkout.js"></script>
+</body>
+</html>

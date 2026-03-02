@@ -1,0 +1,45 @@
+:root {
+    --pending: #f39c12;
+    --accepted: #3498db;
+    --packed: #9b59b6;
+    --shipped: #e67e22;
+    --delivered: #2ecc71;
+    --rejected: #e74c3c;
+    --bg: #f0f2f5;
+}
+
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; }
+
+.dashboard-header { background: #1a202c; color: white; padding: 20px; sticky: top; }
+.header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; }
+
+.filter-tabs { display: flex; gap: 10px; padding: 15px; overflow-x: auto; max-width: 1000px; margin: 0 auto; }
+.tab-btn { padding: 8px 20px; border-radius: 20px; border: none; background: white; cursor: pointer; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.tab-btn.active { background: #3182ce; color: white; }
+
+.orders-container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+
+.order-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #ccc; }
+.order-card.status-pending { border-left-color: var(--pending); }
+.order-card.status-packed { border-left-color: var(--packed); }
+.order-card.status-delivered { border-left-color: var(--delivered); }
+
+.order-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.order-id { font-weight: bold; color: #4a5568; }
+.order-status { font-size: 0.8rem; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; font-weight: bold; }
+
+.order-info { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; font-size: 0.9rem; }
+.info-label { color: #718096; display: block; font-size: 0.75rem; }
+
+.order-actions { display: flex; gap: 10px; border-top: 1px solid #edf2f7; padding-top: 15px; }
+.btn-action { flex: 1; padding: 10px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+
+.btn-accept { background: #ebf8ff; color: #2b6cb0; }
+.btn-pack { background: #faf5ff; color: #6b46c1; }
+.btn-dispatch { background: #fffaf0; color: #9c4221; }
+.btn-view { background: #f7fafc; color: #4a5568; }
+
+/* Modal Styles */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: white; margin: 10% auto; padding: 25px; width: 90%; max-width: 500px; border-radius: 15px; }
+.close-modal { float: right; font-size: 28px; cursor: pointer; }

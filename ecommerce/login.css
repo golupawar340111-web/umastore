@@ -1,0 +1,254 @@
+/* auth-style.css - Login aur Register dono ke liye */
+
+:root {
+    --primary: #4361ee;
+    --dark: #1a1a2e;
+    --text: #444;
+    --bg: #f4f7fe;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Logo Design */
+.auth-logo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.auth-logo span {
+    color: var(--primary);
+}
+
+/* Card Design */
+.auth-card {
+    background: var(--white);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    color: var(--dark);
+    font-size: 26px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    outline: none;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+}
+
+/* Mobile Input Wrapper */
+.mobile-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mobile-input span {
+    padding: 14px;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #666;
+    border-right: 1px solid #e1e1e1;
+}
+
+.mobile-input input {
+    border: none !important;
+    border-radius: 0;
+}
+
+/* OTP Boxes */
+.otp-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 15px 0 25px 0;
+}
+
+.otp-box-login {
+    width: 50px;
+    height: 55px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border: 2px solid #e1e1e1;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.otp-box-login:focus {
+    border-color: var(--primary);
+    background: rgba(67, 97, 238, 0.02);
+}
+
+/* Buttons */
+.auth-btn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.auth-btn:hover {
+    background: #304ed0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+}
+
+.alt-btn {
+    width: 100%;
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #e1e1e1;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+/* Social Login */
+.google-btn {
+    width: 100%;
+    background: white;
+    border: 1px solid #e1e1e1;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.google-btn:hover {
+    background: #f8f9fa;
+}
+
+/* Links */
+.forgot-link {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.forgot-link a, .auth-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* WhatsApp Help Floating */
+.wa-help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+    color: #25D366;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}

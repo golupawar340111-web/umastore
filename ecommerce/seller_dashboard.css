@@ -1,0 +1,305 @@
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+:root {
+    --pharmacy-green: #2ecc71;
+    --pharmacy-dark: #1a1a1a;
+    --bg-light: #f4f7f6;
+    --white: #ffffff;
+    --text-gray: #64748b;
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+    --nav-height: 70px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Mobile touch blue glow remove */
+}
+
+body { 
+    background: var(--bg-light); 
+    color: var(--pharmacy-dark); 
+    padding-top: var(--nav-height); 
+    padding-bottom: 80px; /* Space for Mobile Bottom Nav */
+    line-height: 1.4;
+}
+
+/* --- 1. Navigation (Responsive) --- */
+.sidebar {
+    width: 100%;
+    height: var(--nav-height);
+    background: var(--white);
+    position: fixed;
+    top: 0; left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    z-index: 1000;
+}
+
+.sidebar .logo h2 {
+    color: var(--pharmacy-green);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.sidebar .logo p { font-size: 9px; font-weight: 700; color: var(--text-gray); }
+
+/* Desktop Menu */
+.sidebar ul {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.sidebar ul li {
+    font-weight: 600;
+    color: var(--text-gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: var(--transition);
+    font-size: 13px;
+}
+
+.sidebar ul li:hover, .sidebar ul li.active {
+    color: var(--pharmacy-green);
+    background: rgba(46, 204, 113, 0.1);
+}
+
+/* --- 2. Main Content Adjustment --- */
+.main-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* --- 3. Hero Section (Mobile Optimized) --- */
+.glass-morph-card {
+    background: var(--pharmacy-green);
+    border-radius: 25px;
+    padding: 25px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(46, 204, 113, 0.2);
+}
+
+.hero-main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar-ring {
+    width: 70px; height: 70px; /* Smaller for mobile */
+    background: white;
+    padding: 3px;
+    border-radius: 50%;
+}
+
+.avatar-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+.brand-text h1 { font-size: 1.8rem; font-weight: 800; }
+.brand-text p { font-size: 0.9rem; opacity: 0.9; }
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+}
+
+.stat-bubble {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat-bubble .num { font-size: 18px; font-weight: 800; }
+.stat-bubble .txt { font-size: 10px; text-transform: uppercase; }
+
+/* --- 4. Product Grid (2 Columns on Mobile) --- */
+.inventory-section { margin-top: 30px; }
+
+.section-title h2 { font-size: 20px; margin-bottom: 15px; }
+
+.dynamic-masonry {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 Columns for mobile */
+    gap: 12px;
+}
+
+.nucleus-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #f1f5f9;
+}
+
+.card-img-container {
+    background: #f8fafc;
+    border-radius: 15px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.card-img-container img { width: 85%; object-fit: contain; }
+
+.price-float { font-size: 16px; font-weight: 800; color: var(--pharmacy-green); }
+
+.card-info h4 { 
+    font-size: 13px; font-weight: 700; 
+    margin-bottom: 10px;
+    height: 36px; overflow: hidden; /* Limit to 2 lines */
+}
+
+.btn-glow {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* --- 5. Mobile Bottom Navigation --- */
+@media (max-width: 768px) {
+    .sidebar ul {
+        position: fixed;
+        bottom: 0; left: 0;
+        width: 100%;
+        background: white;
+        height: 70px;
+        justify-content: space-around;
+        padding: 0 10px;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        border-top: 1px solid #eee;
+    }
+
+    .sidebar ul li {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 10px;
+        padding: 10px 5px;
+    }
+
+    .sidebar ul li i { font-size: 20px; }
+
+    .logout { display: none; } /* Hide logout from main nav on mobile */
+    
+    .sidebar .logo { width: 100%; text-align: center; } /* Center logo */
+    
+    /* Bigger screens (Tablets) */
+    @media (min-width: 480px) {
+        .dynamic-masonry { grid-template-columns: repeat(3, 1fr); }
+    }
+}
+
+/* Desktop Only Adjustments */
+@media (min-width: 769px) {
+    .dynamic-masonry { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .glass-morph-card { flex-direction: row; padding: 40px; }
+    .hero-stats { width: auto; }
+}
+/* --- 1. Edit Brand Button (Glow Effect) --- */
+.btn-glow {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
+}
+
+.btn-glow:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(46, 204, 113, 0.3);
+    filter: brightness(1.1);
+}
+
+/* --- 2. Share Button (Circular Glass) --- */
+.btn-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+    background: white;
+    color: var(--pharmacy-green);
+    transform: rotate(15deg);
+}
+
+/* --- 3. Logout Button (Modern Minimal) --- */
+.logout button {
+    background: #fff5f5;
+    color: #ff4757;
+    border: 1.5px solid #feb2b2;
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logout button i {
+    font-size: 16px;
+}
+
+.logout button:hover {
+    background: #ff4757;
+    color: white;
+    border-color: #ff4757;
+    box-shadow: 0 10px 20px rgba(255, 71, 87, 0.2);
+    transform: scale(1.05);
+}
+
+/* --- Mobile Specific Fix for Buttons --- */
+@media (max-width: 768px) {
+    .action-row {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-glow {
+        flex: 1; /* Button mobile par puri width cover karega */
+        justify-content: center;
+    }
+}

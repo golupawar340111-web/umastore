@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | UMA STORE</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+
+    
+    <link rel="stylesheet" href="product.css">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="p-container">
+    <div class="p-image-side">
+        <img id="mainImage" src="placeholder.jpg" class="main-img" alt="Main Photo">
+        <div class="thumb-grp" id="thumbGroup"></div>
+    </div>
+
+    <div class="p-info-side">
+        <div class="stock-tag in-stock" id="stockStatus">In Stock</div>
+        <h2 id="pTitle">Loading...</h2>
+        
+        <div class="price-tag">
+            ₹<span id="offerPrice">0</span>
+            <span class="mrp">₹<span id="mrpPrice">0</span></span>
+        </div>
+
+        <div class="benefits-box">
+            <strong>Key Benefits:</strong>
+            <ul>
+                <li><i class="fa fa-check-circle"></i> 100% Organic & Fresh</li>
+                <li><i class="fa fa-check-circle"></i> Pure Indian Quality</li>
+            </ul>
+        </div>
+
+        <p id="pDesc">Product ki jankari load ho rahi hai...</p>
+
+        <div class="delivery-info">
+            <i class="fa fa-truck"></i> Delivery in 2-3 Days | Indore
+        </div>
+
+       <div class="btn-grp">
+    <button class="add-cart" onclick="addToCart()">Add to Cart</button>
+    <button class="buy-now" onclick="buyNowShortcut()">Buy Now</button>
+</div>
+    </div>
+</div>
+
+<script>
+    // Firebase Config yahan bhi honi chahiye agar product.js mein nahi hai
+    const firebaseConfig = {
+        apiKey: "AIzaSyBEzu1v0s0OxYOIgzdCWMLmt5dd-wX5lO8",
+        authDomain: "umastore-4f131.firebaseapp.com",
+        projectId: "umastore-4f131",
+        storageBucket: "umastore-4f131.firebasestorage.app",
+        messagingSenderId: "772729193852",
+        appId: "1:772729193852:web:983919536e8196abc110f9"
+    };
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+</script>
+<script src="product.js"></script>
+</body>
+</html>

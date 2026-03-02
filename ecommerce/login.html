@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Uma Store</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-logo" onclick="window.location.href='index.html'">
+            UMA<span>STORE</span>
+        </div>
+
+        <div class="auth-card" id="loginCard">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Login to continue shopping</p>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <div class="mobile-input">
+                        <span>+91</span>
+                        <input type="tel" id="loginMobile" placeholder="98765 XXXXX" maxlength="10" required>
+                    </div>
+                </div>
+
+                <div id="passwordArea" class="hidden">
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPass" placeholder="Enter password">
+                    </div>
+                    <p class="forgot-link"><a href="#">Forgot Password?</a></p>
+                </div>
+
+                <div id="otpArea" class="hidden">
+                    <label style="font-size: 14px; font-weight: 600;">Enter 4-Digit OTP</label>
+                    <div class="otp-inputs">
+                        <input type="text" maxlength="1" class="otp-box-login">
+                        <input type="text" maxlength="1" class="otp-box-login">
+                        <input type="text" maxlength="1" class="otp-box-login">
+                        <input type="text" maxlength="1" class="otp-box-login">
+                    </div>
+                </div>
+
+                <button type="submit" class="auth-btn" id="mainBtn">Login with OTP</button>
+                
+                <div class="divider">OR</div>
+                
+                <button type="button" class="alt-btn" id="toggleBtn" onclick="toggleLoginMethod()">Login with Password</button>
+            </form>
+
+            <div class="social-login">
+                <button class="google-btn"><img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" width="18"> Continue with Google</button>
+            </div>
+
+            <div class="auth-footer">
+                New here? <a href="register.html">Create Account</a>
+            </div>
+        </div>
+
+        <a href="https://wa.me/919201380750" class="wa-help">
+            <i class="fab fa-whatsapp"></i> Need help? Chat with us
+        </a>
+    </div>
+
+   <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+
+<script src="login.js"></script>
+</body>
+</html>

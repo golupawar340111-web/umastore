@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist | UMA STORE</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --primary: #e63946; --bg: #f8f9fa; --text: #1d3557; }
+        body { background: var(--bg); font-family: 'Segoe UI', sans-serif; margin: 0; color: var(--text); }
+        
+        /* Header */
+        .header { background: white; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .header i { font-size: 1.2rem; margin-right: 15px; cursor: pointer; color: var(--text); }
+        .header h2 { margin: 0; font-size: 1.1rem; flex-grow: 1; }
+        .wish-count { background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
+
+        /* Wishlist Item Card */
+        .wish-item { background: white; border-radius: 12px; padding: 12px; display: flex; gap: 12px; margin-bottom: 12px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        
+        .product-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; background: #f0f0f0; }
+        
+        .item-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-name { font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; display: block; }
+        .item-price { color: #2a9d8f; font-weight: 700; font-size: 1rem; }
+        
+        .stock-status { font-size: 0.75rem; margin-top: 5px; font-weight: 600; }
+        .in-stock { color: #2ecc71; }
+        .out-stock { color: #e74c3c; }
+
+        /* Actions */
+        .item-actions { display: flex; gap: 10px; margin-top: 10px; }
+        
+        .btn-add-cart { background: var(--text); color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .btn-add-cart:disabled { background: #ccc; cursor: not-allowed; }
+
+        .btn-remove { color: #888; border: none; background: none; font-size: 1.1rem; cursor: pointer; position: absolute; top: 10px; right: 10px; }
+        .btn-remove:hover { color: var(--primary); }
+
+        /* Empty State */
+        .empty-wishlist { text-align: center; padding: 50px 20px; }
+        .empty-wishlist i { font-size: 4rem; color: #ddd; margin-bottom: 15px; }
+        .empty-wishlist p { color: #888; font-size: 1rem; }
+        .btn-shop-now { display: inline-block; margin-top: 15px; background: var(--primary); color: white; padding: 10px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <i class="fa fa-arrow-left" onclick="window.location.href='index.html'"></i>
+    <h2>Meri Pasand ❤️</h2>
+    <span class="wish-count" id="wishCount">0</span>
+</div>
+
+<div class="container" id="wishlistContainer">
+    <div class="empty-wishlist" id="emptyMsg">
+        <i class="fa fa-heart-broken"></i>
+        <p>The wishlist is empty<br>Keep your favorites here.</p>
+        <a href="index.html" class="btn-shop-now">Shopping Karein</a>
+    </div>
+</div>
+
+<script>
+    // 1. Firebase Config (Connect your firebase here)
+    // var db = firebase.firestore();
+
+    // Sample Wishlist Data for UI Testing
+    let wishlistItems = [
+        { id: 'p1', name: 'Premium Basmati Rice', price: 120, img: 'https://via.placeholder.com/80', inStock: true },
+        { id: 'p2', name: 'Fresh Sunflower Oil (1L)', price: 185, img: 'https://via.placeholder.com/80', inStock: false },
+        { id: 'p3', name: 'Moong Dal (500g)', price: 95, img: 'https://via.placeholder.com/80', inStock: true }
+    ];
+
+    function renderWishlist() {
+        const container = document.getElementById('wishlistContainer');
+        const countBadge = document.getElementById('wishCount');
+        
+        if (wishlistItems.length === 0) {
+            document.getElementById('emptyMsg').style.display = 'block';
+            countBadge.innerText = 0;
+            return;
+        }
+
+        document.getElementById('emptyMsg').style.display = 'none';
+        countBadge.innerText = wishlistItems.length;
+
+        // Clear and reload list
+        const listHtml = wishlistItems.map(item => `
+            <div class="wish-item" id="item-${item.id}">
+                <img src="${item.img}" class="product-img" alt="${item.name}">
+                <div class="item-info">
+                    <div>
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-price">₹${item.price}</span>
+                        <div class="stock-status ${item.inStock ? 'in-stock' : 'out-stock'}">
+                            ${item.inStock ? '● In Stock' : '● Out of Stock'}
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-add-cart" ${!item.inStock ? 'disabled' : ''} onclick="moveToCart('${item.id}')">
+                            <i class="fa fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-remove" onclick="removeItem('${item.id}')">
+                    <i class="fa fa-trash-alt"></i>
+                </button>
+            </div>
+        `).join('');
+
+        container.innerHTML = listHtml;
+    }
+
+    // Function to Move to Cart
+    function moveToCart(productId) {
+        // Logic: Add to 'umaCart' localStorage and Remove from Wishlist
+        alert("Added to your cart!");
+        removeItem(productId);
+    }
+
+    // Function to Remove Item
+    function removeItem(productId) {
+        wishlistItems = wishlistItems.filter(item => item.id !== productId);
+        renderWishlist();
+        // Firebase Logic: db.collection("wishlist").doc(id).delete()...
+    }
+
+    // Initial Load
+    window.onload = renderWishlist;
+</script>
+
+</body>
+</html>

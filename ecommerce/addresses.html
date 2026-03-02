@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Address | UMA Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="addresses.css">
+</head>
+<body>
+
+    <div class="address-container">
+        <header class="address-header">
+            <a href="cart.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Delivery Details</h1>
+        </header>
+
+        <form id="address-form" class="address-form">
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="full-name" placeholder="Enter receiver's name" required>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-phone-alt"></i> Mobile Number</label>
+                <input type="tel" id="mobile-number" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+            </div>
+
+            <div class="input-group">
+    <button type="button" onclick="checkDeliveryEligibility()" class="btn-location">
+        <i class="fas fa-crosshairs"></i> Detect My Delivery Zone
+    </button>
+    <div id="deliveryInfo"></div>
+</div>
+
+            <div class="input-group">
+                <label><i class="fas fa-home"></i> House No. / Street</label>
+                <textarea id="short-address" rows="2" placeholder="Ghar ka pata (Short detail)" required></textarea>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-landmark"></i> Landmark (Optional)</label>
+                <input type="text" id="landmark" placeholder="Example: Near Shiv Mandir">
+            </div>
+
+            <div class="info-alert">
+                <i class="fas fa-info-circle"></i>
+                <span>This address will be saved for your future orders.</span>
+            </div>
+
+            <button type="submit" class="save-btn">
+                Confirm & Proceed <i class="fas fa-check-circle"></i>
+            </button>
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="addresses.js"></script>
+</body>
+</html>
